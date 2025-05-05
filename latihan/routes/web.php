@@ -23,3 +23,12 @@ Route::get("/total/{bil1}/{bil2?}/{bil3?}",
         'bil3' => $bil3
     ]);
 });
+
+
+Route::get('/materi/index', [MateriController::class, 'index']);
+
+Route::get('/materi/detail/{id}', [MateriController::class, 'detail']);
+
+Route::resource('prodi', ProdiController::class);
+
+Route::apiResource('api/mhs', MhsApiController::class);
