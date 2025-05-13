@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 
 class MhsApiController extends Controller
@@ -11,7 +12,8 @@ class MhsApiController extends Controller
      */
     public function index()
     {
-        //
+        $mhs = Mahasiswa::with(["prodi"])->get();
+        return $mhs;
     }
 
     /**

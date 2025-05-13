@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\MateriController;
+use App\Http\Controllers\MhsApiController;
+use App\Http\Controllers\ProdiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get("/profil", function(){
