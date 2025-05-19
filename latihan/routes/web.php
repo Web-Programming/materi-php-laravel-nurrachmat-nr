@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\MhsApiController;
 use App\Http\Controllers\ProdiController;
@@ -33,5 +34,5 @@ Route::get('/materi/index', [MateriController::class, 'index']);
 Route::get('/materi/detail/{id}', [MateriController::class, 'detail']);
 
 Route::resource('prodi', ProdiController::class);
-
+Route::resource('fakultas', FakultasController::class);
 Route::apiResource('api/mhs', MhsApiController::class);

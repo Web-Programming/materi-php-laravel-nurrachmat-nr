@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', "Halaman Edit Prodi")
+@section('title', "Halaman List fakultas")
 
 @section('content')
         <!--begin::App Content Header-->
@@ -9,12 +9,11 @@
           <div class="container-fluid">
             <!--begin::Row-->
             <div class="row">
-              <div class="col-sm-6"><h3 class="mb-0">Program Studi</h3></div>
+              <div class="col-sm-6"><h3 class="mb-0">Fakultas</h3></div>
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-end">
                   <li class="breadcrumb-item"><a href="{{ url("/") }}">Home</a></li>
-                  <li class="breadcrumb-item"><a href="{{ url("/prodi") }}">Program Studi</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Program Studi</li>
+                  <li class="breadcrumb-item active" aria-current="page">Fakultas</li>
                 </ol>
               </div>
             </div>
@@ -33,7 +32,7 @@
                 <!-- Default box -->
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Program Studi : ....</h3>
+                    <h3 class="card-title">Fakultas</h3>
                     <div class="card-tools">
                       <button
                         type="button"
@@ -55,28 +54,49 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <!-- Menampilkaan pesan insert sukses -->
+                    @if (session("status"))
+                      <div class="alert alert-success">
+                        {{ session("status")}}
+                      </div>
+                    @endif  
 
-                  <form action="{{ url("/prodi/".$prodi->id)}}" method="post">
-                      @method("PUT")
-                      @csrf
-                      <!-- <div class="">
-                        <label class="">Kode Prodi</label>
-                        <input class="form-control" type="text" name="kode_prodi" 
-                          value="{{ old("kode_prodi", $prodi->kode_prodi) }}">
-                        @error("kode_prodi")
-                          <p class="text-danger"> {{ $message }} </p>
-                        @enderror
-                      </div>    -->
-                      <div class="">
-                        <label class="">Nama Prodi</label>
-                        <input class="form-control" type="text" name="nama" 
-                        value="{{ old("nama", $prodi->nama) }}">
-                        @error("nama")
-                          <p class="text-danger"> {{ $message }} </p>
-                        @enderror
-                      </div>                            
-                      <button type="submit" class="btn btn-warning">Update</button>
-                    </form>
+                    @if (session("failed"))
+                      <div class="alert alert-danger">
+                        {{ session("failed")}}
+                      </div>
+                    @endif  
+
+                    <a href="{{url("/fakultas/create" )}}" class="btn btn-small btn-success">
+                        Buat fakultas Baru
+                    </a>
+                   <table class="table table-bordered mt-2">
+                    <tr>
+                      <th>No</th>
+                      <th>Nama</th>
+                      <th>Aksi</th>
+                    </tr>
+                    @foreach ($listfakultas as $fakultas) 
+                      <tr>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$fakultas->nama}}</td>
+                        <td>
+                          <form action="{{ url("/fakultas/".$fakultas->id) }}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <a href="{{url("/fakultas/".$fakultas->id )}}" class="btn btn-small btn-default">
+                              Detail
+                            </a> 
+
+                            <a href="{{url("/fakultas/".$fakultas->id."/edit" )}}" class="btn btn-small btn-warning">
+                              Edit
+                            </a> 
+                            <button type="submit" class="btn btn-small btn-danger">Delete</button>
+                          </form>  
+                        </td>
+                      </tr>
+                    @endforeach
+                   </table>
 
                   </div>
                   <!-- /.card-body -->

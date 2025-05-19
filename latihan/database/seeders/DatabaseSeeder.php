@@ -40,19 +40,19 @@ class DatabaseSeeder extends Seeder
         //     ->where("npm", "2009250066")
         //     ->update(["npm" => "200920066P"]);
 
-        Mahasiswa::insert(
-            [
-                'npm' => '2009250011',
-                'nama_mahasiswa' => 'Nur Rachmat',
-                'tempat_lahir' => 'Mumbai',
-                'tanggal_lahir' => '2001-01-01',
-                'alamat' => 'Palembang',
-                'created_at' => date("Y-m-d H:i:s")
-            ]);
+        // Mahasiswa::insert(
+        //     [
+        //         'npm' => '2009250011',
+        //         'nama_mahasiswa' => 'Nur Rachmat',
+        //         'tempat_lahir' => 'Mumbai',
+        //         'tanggal_lahir' => '2001-01-01',
+        //         'alamat' => 'Palembang',
+        //         'created_at' => date("Y-m-d H:i:s")
+        //     ]);
 
         //retirve all data
         Mahasiswa::all(); //select * from mahasiswa
         Mahasiswa::where('id', '<', 3)->get(); //select * from mahasiswa where id < 3 
-        Mahasiswa::select(['npm','nama'])->get(); //select npm, nama from mahasiswa 
+        //Mahasiswa::select(['npm','nama'])->get(); //select npm, nama from mahasiswa 
     }
 }

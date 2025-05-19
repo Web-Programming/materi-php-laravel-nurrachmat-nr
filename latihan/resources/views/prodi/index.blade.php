@@ -54,9 +54,16 @@
                     </div>
                   </div>
                   <div class="card-body">
+                    <!-- Menampilkaan pesan insert sukses -->
                     @if (session("status"))
                       <div class="alert alert-success">
                         {{ session("status")}}
+                      </div>
+                    @endif  
+
+                    @if (session("failed"))
+                      <div class="alert alert-danger">
+                        {{ session("failed")}}
                       </div>
                     @endif  
 
@@ -66,6 +73,7 @@
                    <table class="table table-bordered mt-2">
                     <tr>
                       <th>No</th>
+                      <th>Faklutas</th>
                       <th>Kode</th>
                       <th>Nama</th>
                       <th>Aksi</th>
@@ -73,10 +81,23 @@
                     @foreach ($listprodi as $prodi) 
                       <tr>
                         <td>{{$loop->iteration}}</td>
+                        <td>
+                          @if ($prodi->fakultas)
+                            {{$prodi->fakultas->nama}}
+                          @else
+                            -
+                          @endif
+                        </td>
                         <td>{{$prodi->kode_prodi}}</td>
                         <td>{{$prodi->nama}}</td>
                         <td>
-                          <form action="delete">
+                          <form action="{{ url("/prodi/".$prodi->id) }}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <a href="{{url("/prodi/".$prodi->id )}}" class="btn btn-small btn-default">
+                              Detail
+                            </a> 
+
                             <a href="{{url("/prodi/".$prodi->id."/edit" )}}" class="btn btn-small btn-warning">
                               Edit
                             </a> 

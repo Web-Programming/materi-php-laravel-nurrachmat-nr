@@ -39,6 +39,30 @@
                 </a>
                
               </li>
+
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon bi bi-speedometer"></i>
+                  <p>
+                    Fakultas
+                    <i class="nav-arrow bi bi-chevron-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url("/fakultas") }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i> 
+                      <p>List Fakultas</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url("/fakultas/create") }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i>
+                      <p>Create Fakultas</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
              
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -50,8 +74,8 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url("/prodi/index") }}" class="nav-link">
-                      <i class="nav-icon bi bi-circle"></i>
+                    <a href="{{ url("/prodi") }}" class="nav-link">
+                      <i class="nav-icon bi bi-circle"></i> 
                       <p>List Prodi</p>
                     </a>
                   </li>

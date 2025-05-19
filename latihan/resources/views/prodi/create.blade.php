@@ -58,12 +58,31 @@
                     <form action="{{ url("/prodi")}}" method="post">
                       @csrf
                       <div class="">
+                        <label class="">Fakultas</label>
+                        <select class="form-control" name="fakultas_id">
+                          <option value="">Pilih Fakultas</option>
+                          @foreach ($fakultas as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                          @endforeach
+                        </select>
+                        
+                        @error("kode_prodi")
+                          <p class="text-danger"> {{ $message }} </p>
+                        @enderror
+                      </div> 
+                      <div class="">
                         <label class="">Kode Prodi</label>
-                        <input class="form-control" type="text" name="kode_prodi">
+                        <input class="form-control" type="text" name="kode_prodi" value="{{ old("kode_prodi") }}">
+                        @error("kode_prodi")
+                          <p class="text-danger"> {{ $message }} </p>
+                        @enderror
                       </div>   
                       <div class="">
                         <label class="">Nama Prodi</label>
-                        <input class="form-control" type="text" name="nama">
+                        <input class="form-control" type="text" name="nama" value="{{ old("nama") }}">
+                        @error("nama")
+                          <p class="text-danger"> {{ $message }} </p>
+                        @enderror
                       </div>                            
                       <button type="submit" class="btn btn-success">Simpan</button>
                     </form>
