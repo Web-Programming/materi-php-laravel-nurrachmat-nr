@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\MhsApiController;
@@ -36,3 +37,9 @@ Route::get('/materi/detail/{id}', [MateriController::class, 'detail']);
 Route::resource('prodi', ProdiController::class);
 Route::resource('fakultas', FakultasController::class);
 Route::apiResource('api/mhs', MhsApiController::class);
+
+//Authentication
+Route::get("/login", [AuthController::class, 'login']);
+Route::post("/login", [AuthController::class, 'do_login']);
+Route::get("/register", [AuthController::class, 'register']);
+Route::post("/register", [AuthController::class, 'do_register']);
