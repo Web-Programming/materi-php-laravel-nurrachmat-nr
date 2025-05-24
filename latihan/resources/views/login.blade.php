@@ -53,27 +53,32 @@
         </div>
         <div class="card-body login-card-body">
           <p class="login-box-msg">Sign in to start your session</p>
+          @error('failed')
+          <div class="alert alert-danger">
+            {{ $message }}
+          </div>
+          @enderror
           <form action="{{ url("login") }}" method="post">
             @csrf
             <div class="input-group mb-1">
               <div class="form-floating">
-                <input id="loginEmail" type="email" class="form-control" value="{{ old('email') }}" placeholder="" />
+                <input id="loginEmail" type="email" name="email" class="form-control" value="{{ old('email') }}" placeholder="" />
                 <label for="loginEmail">Email</label>
               </div>
               <div class="input-group-text"><span class="bi bi-envelope"></span></div>
             </div>
             @error('email')
-                <span class="alert alert-danger">{{ $message }}</span>
+                <span class="text-danger">{{ $message }}</span>
             @enderror
             <div class="input-group mb-1">
               <div class="form-floating">
-                <input id="loginPassword" type="password" class="form-control" placeholder="" />
+                <input id="loginPassword" type="password" name="password" class="form-control" placeholder="" />
                 <label for="loginPassword">Password</label>
               </div>
               <div class="input-group-text"><span class="bi bi-lock-fill"></span></div>
             </div>
             @error('password')
-                <span class="alert alert-danger">{{ $message }}</span>
+                <span class="text-danger">{{ $message }}</span>
             @enderror
             <!--begin::Row-->
             <div class="row">

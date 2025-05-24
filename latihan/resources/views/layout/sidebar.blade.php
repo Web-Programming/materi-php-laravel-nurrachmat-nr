@@ -12,7 +12,7 @@
             />
             <!--end::Brand Image-->
             <!--begin::Brand Text-->
-            <span class="brand-text fw-light">SI41 Laravel</span>
+            <span class="brand-text fw-light">Laravel</span>
             <!--end::Brand Text-->
           </a>
           <!--end::Brand Link-->

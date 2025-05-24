@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', "Halaman List Prodi")
+@section('title', "Dasboard - Home")
 
 @section('content')
         <!--begin::App Content Header-->
