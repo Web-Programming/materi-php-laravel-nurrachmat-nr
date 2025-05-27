@@ -66,10 +66,11 @@
                         {{ session("failed")}}
                       </div>
                     @endif  
-
-                    <a href="{{url("/prodi/create" )}}" class="btn btn-small btn-success">
+                    @if (Auth::user()->can("create", \App\Models\Prodi::class))    
+                    <a href="{{url( Auth::user()->level."/prodi/create" )}}" class="btn btn-small btn-success">
                         Buat Prodi Baru
                     </a>
+                    @endif
                    <table class="table table-bordered mt-2">
                     <tr>
                       <th>No</th>
@@ -91,17 +92,21 @@
                         <td>{{$prodi->kode_prodi}}</td>
                         <td>{{$prodi->nama}}</td>
                         <td>
-                          <form action="{{ url("/prodi/".$prodi->id) }}" method="post">
+                          <form action="{{ url( Auth::user()->level."/prodi/".$prodi->id) }}" method="post">
                             @csrf
                             @method("DELETE")
-                            <a href="{{url("/prodi/".$prodi->id )}}" class="btn btn-small btn-default">
+                            <a href="{{url( Auth::user()->level."/prodi/".$prodi->id )}}" class="btn btn-small btn-default">
                               Detail
                             </a> 
+                            @if (Auth::user()->can("update", $prodi))
+                              <a href="{{url(Auth::user()->level. "/prodi/".$prodi->id."/edit" )}}" class="btn btn-small btn-warning">
+                                Edit
+                              </a> 
+                            @endif
 
-                            <a href="{{url("/prodi/".$prodi->id."/edit" )}}" class="btn btn-small btn-warning">
-                              Edit
-                            </a> 
-                            <button type="submit" class="btn btn-small btn-danger">Delete</button>
+                            @can("delete", $prodi)    
+                              <button type="submit" class="btn btn-small btn-danger">Delete</button>
+                            @endcan
                           </form>  
                         </td>
                       </tr>

@@ -74,17 +74,19 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url("/prodi") }}" class="nav-link">
+                    <a href="{{ url(Auth::user()->level."/prodi") }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i> 
                       <p>List Prodi</p>
                     </a>
                   </li>
+                  @can("create", \App\Models\Prodi::class)
                   <li class="nav-item">
-                    <a href="{{ url("/prodi/create") }}" class="nav-link">
+                    <a href="{{ url(Auth::user()->level."/prodi/create") }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Create Prodi</p>
                     </a>
                   </li>
+                  @endcan
                 </ul>
               </li>
               <li class="nav-item">
@@ -97,7 +99,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url("/dosen") }}" class="nav-link">
+                    <a href="{{ url(Auth::user()->level."/dosen") }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i> 
                       <p>List Dosen</p>
                     </a>
@@ -114,7 +116,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url("/mahasiswa") }}" class="nav-link">
+                    <a href="{{ url(Auth::user()->level."/mahasiswa") }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i> 
                       <p>List Mahasiswa</p>
                     </a>
@@ -131,7 +133,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="{{ url("/materi") }}" class="nav-link">
+                    <a href="{{ url(Auth::user()->level."/materi") }}" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i> 
                       <p>List Materi</p>
                     </a>

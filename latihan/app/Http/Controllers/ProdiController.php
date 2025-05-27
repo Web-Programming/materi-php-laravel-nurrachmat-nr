@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Fakultas;
 use App\Models\Prodi;
+use App\Models\User;
 use DB;
+use Gate;
 use Illuminate\Http\Request;
 
 class ProdiController extends Controller
@@ -14,6 +16,8 @@ class ProdiController extends Controller
      */
     public function index()
     {
+        Gate::authorize("viewAny", Prodi::class);
+
         $listprodi = Prodi::all(); //select * from prodis;
         //$listprodi = DB::table("prodis")->get();
         return view("prodi.index", 
@@ -26,6 +30,7 @@ class ProdiController extends Controller
      */
     public function create()
     {
+        Gate::authorize("create", Prodi::class);
         $fakutas = Fakultas::all();
         return view("prodi.create", [
             'fakultas' => $fakutas
@@ -38,6 +43,9 @@ class ProdiController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Gate::allows("isuser")){
+            abort(403);
+        }
         //Form Validation
         $data = $request->validate([
             'kode_prodi' => 'required|min:2|max:2',
@@ -76,9 +84,11 @@ class ProdiController extends Controller
      */
     public function show(string $id)
     {
+        Gate::authorize("view", Prodi::class);
         $prodi = Prodi::find($id);
         if(!isset($prodi->id)){
-            return redirect("prodi")->with("failed", "Program Studi tidak ditemukan!");
+            return redirect("prodi")->with("failed", 
+            "Program Studi tidak ditemukan!");
         }
         return view("prodi.detail", [
             'prodi' => $prodi
@@ -90,6 +100,9 @@ class ProdiController extends Controller
      */
     public function edit(string $id)
     {
+        if(!Gate::allows("isadmin")){
+            abort(403);
+        }
         //Ambil data berdasarkan id
         $prodi = Prodi::find($id); 
         if(!isset($prodi->id)){
@@ -108,6 +121,9 @@ class ProdiController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if(!Gate::allows("isuser")){
+            abort(403);
+        }
         //Form Validation
         $data = $request->validate([
             //'kode_prodi' => 'required|min:2|max:2',
@@ -128,6 +144,9 @@ class ProdiController extends Controller
      */
     public function destroy(string $id)
     {
+        if(!Gate::allows("isuser")){
+            abort(403);
+        }
         $prodi = Prodi::find($id);
 
         if(isset($prodi->id)){
